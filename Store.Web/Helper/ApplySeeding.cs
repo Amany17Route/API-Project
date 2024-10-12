@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Store.Data.Context;
 using Store.Repository;
 
@@ -20,6 +21,8 @@ namespace Store.Web.Helper
                 {
 
                     var context = service.GetRequiredService<StoreDbContext>();
+
+                    await context.Database.MigrateAsync();
 
                     await StoreContextSeed.SeedAsync(context, loggerFactory);
 

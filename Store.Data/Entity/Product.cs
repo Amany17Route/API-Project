@@ -16,12 +16,15 @@ namespace Store.Data.Entity
 
         public decimal Price { get; set; }
 
+   public ProductType Type { get; set; }
+
         public int TypeId { get; set; }
 
-        public ProductType ProductType { get; set; }
+
+        public ProductBrand Brand { get; set; }
 
         public int BrandId { get; set; }
-        public ProductBrand ProductBrand { get; set; }
+   
 
 
 

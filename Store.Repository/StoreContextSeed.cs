@@ -20,22 +20,12 @@ namespace Store.Repository
             try
             {
 
-                if (context.ProductBrands != null && !context.ProductBrands.Any())
-                {
 
-                    var brandData = File.ReadAllText(" .. /Store.Repository/SeedData/brands.json");
-                    var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandData);
 
-                    if (brands is not null)
-                    {
-
-                        await context.ProductBrands.AddRangeAsync(brands);
-                    }
-                }
                 if (context.ProductTypes != null && !context.ProductTypes.Any())
                 {
 
-                    var typeData = File.ReadAllText(" .. /Store.Repository/SeedData/types.json");
+                    var typeData = File.ReadAllText("../Store.Repository/SeedData/types.json");
                     var types = JsonSerializer.Deserialize<List<ProductType>>(typeData);
 
                     if (types is not null)
@@ -45,9 +35,26 @@ namespace Store.Repository
                     }
                 }
 
+
+
+                if (context.ProductBrands != null && !context.ProductBrands.Any())
+                {
+
+                    var brandData = File.ReadAllText("../Store.Repository/SeedData/brands.json");
+                    var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandData);
+
+                    if (brands is not null)
+                    {
+
+                        await context.ProductBrands.AddRangeAsync(brands);
+                    }
+                }
+
+
+
                 if (context.Products != null && !context.Products.Any())
                 {
-                    var productData = File.ReadAllText(" .. /Store.Repository/SeedData/products.json");
+                    var productData = File.ReadAllText("../Store.Repository/SeedData/products.json");
                     var products = JsonSerializer.Deserialize<List<Product>>(productData);
                     if (products is not null)
                     {

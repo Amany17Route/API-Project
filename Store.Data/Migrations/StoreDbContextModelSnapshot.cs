@@ -41,7 +41,6 @@ namespace Store.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -51,20 +50,14 @@ namespace Store.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductBrandId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductTypeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductBrandId");
+                    b.HasIndex("BrandId");
 
-                    b.HasIndex("ProductTypeId");
+                    b.HasIndex("TypeId");
 
                     b.ToTable("Products");
                 });
@@ -111,21 +104,21 @@ namespace Store.Data.Migrations
 
             modelBuilder.Entity("Store.Data.Entity.Product", b =>
                 {
-                    b.HasOne("Store.Data.Entity.ProductBrand", "ProductBrand")
+                    b.HasOne("Store.Data.Entity.ProductBrand", "Brand")
                         .WithMany()
-                        .HasForeignKey("ProductBrandId")
+                        .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Store.Data.Entity.ProductType", "ProductType")
+                    b.HasOne("Store.Data.Entity.ProductType", "Type")
                         .WithMany()
-                        .HasForeignKey("ProductTypeId")
+                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ProductBrand");
+                    b.Navigation("Brand");
 
-                    b.Navigation("ProductType");
+                    b.Navigation("Type");
                 });
 #pragma warning restore 612, 618
         }
