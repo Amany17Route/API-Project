@@ -19,7 +19,7 @@ namespace Store.Service.Services.Products.Dtos
         public decimal Price { get; set; }
 
 
-        public string PicturUrl { get; set; }
+        public string ImageUrl { get; set; }
 
 
         public string BarndName { get; set; }
