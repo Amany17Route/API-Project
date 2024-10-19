@@ -44,6 +44,7 @@ namespace Store.Service.Services.Products
             var MappedProducts = _mapper.Map<IReadOnlyList<ProductDto>>(products);
 
 
+
             return MappedProducts;
         }
 
