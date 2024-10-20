@@ -23,6 +23,7 @@ namespace Store.Repository.Interfaces
 
         Task<IReadOnlyList<TEntity>> GetAllwithSpecificationAsync(ISpecification<TEntity> specs);
 
+        Task<int> GetCountWithSpecification(ISpecification<TEntity> specs);
 
         Task AddAsync(TEntity entity);
 

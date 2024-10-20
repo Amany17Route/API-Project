@@ -19,6 +19,8 @@ namespace Store.Repository.Specification.ProductSpecs
             AddInclude(x => x.Type);
             AddOrederBy(x => x.Name);
 
+            ApplyPagination(specs.PageSize * (specs.PageIndex - 1), specs.PageSize);
+
             if (!string.IsNullOrEmpty(specs.Sort))
             {
                 switch (specs.Sort)
