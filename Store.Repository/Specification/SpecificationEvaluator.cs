@@ -23,6 +23,23 @@ namespace Store.Repository.Specification
 
                 query = query.Where(specs.Criteria);
             }
+
+
+            if (specs.OrderBy is not null)
+            {
+                query = query.OrderBy(specs.OrderBy); 
+            }
+
+            if (specs.OrderByDescending is not null)
+            {
+                query = query.OrderBy(specs.OrderByDescending); 
+            }
+
+            if (specs.IsPaginated)
+            {
+                query = query.Skip(specs.Skip).Take(specs.Take);
+            }
+
             query = specs.Includes.Aggregate(query, (Current, includeEx) => Current.Include(includeEx));
 
             return query;

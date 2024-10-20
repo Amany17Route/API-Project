@@ -37,7 +37,7 @@ namespace Store.Web.Controllers
 
         [HttpGet]
 
-        public async Task<ActionResult<ProductDto>> GetProductById(int? id)
+        public async Task<ActionResult<ProductDto>> GetProductById([FromQuery] int? id)
         => Ok(await _productService.GetProductBuIdAsync(id));
 
 
