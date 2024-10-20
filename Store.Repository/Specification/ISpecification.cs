@@ -9,9 +9,13 @@ namespace Store.Repository.Specification
 {
     public interface ISpecification<T>
     {
+        // where condition
         Expression <Func<T, bool>> Criteria { get; }
-
+        // includes
         List<Expression<Func<T, object>>> Includes { get; }
 
+        // order
+        Expression <Func<T ,object>> OrderBy { get; }
+        Expression <Func<T ,object>> OrderByDescending { get; }
     }
 }

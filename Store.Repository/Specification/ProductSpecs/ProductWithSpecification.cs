@@ -17,9 +17,33 @@ namespace Store.Repository.Specification.ProductSpecs
         {
             AddInclude(x => x.Brand);
             AddInclude(x => x.Type);
+            AddOrederBy(x => x.Name);
+
+            if (!string.IsNullOrEmpty(specs.Sort))
+            {
+                switch (specs.Sort)
+                {
+                    case "PriceAsc":
+                        AddOrederBy(x => x.Price);
+                        break;
+                    case "PriceDesc":
+                        AddOrederByDecsending(x => x.Price);
+                        break;
+                    default:
+                        AddOrederBy(x => x.Name);
+                        break;
+
+                }
+            }
+
+
         }
 
-
+        public ProductWithSpecification(int? id) : base(prod => prod.Id == id)
+        {
+            AddInclude(x => x.Brand);
+            AddInclude(x => x.Type);
+        }
 
     }
 }
