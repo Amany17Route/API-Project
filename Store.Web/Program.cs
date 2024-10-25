@@ -35,6 +35,7 @@ namespace Store.Web
 
 
 
+
             builder.Services.ApplicationServices();
             var app = builder.Build();
 
