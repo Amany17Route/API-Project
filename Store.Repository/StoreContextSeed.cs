@@ -15,13 +15,8 @@ namespace Store.Repository
 
         public static async Task SeedAsync(StoreDbContext context, ILoggerFactory LoggerFactory)
         {
-
-
             try
             {
-
-
-
                 if (context.ProductTypes != null && !context.ProductTypes.Any())
                 {
 
@@ -60,8 +55,24 @@ namespace Store.Repository
                     {
                         await context.Products.AddRangeAsync(products);
                     }
+
+                    await context.SaveChangesAsync();
                 }
-                await context.SaveChangesAsync();
+
+
+
+                if (context.DeliveryMethods != null && !context.DeliveryMethods.Any())
+                {
+                    var deliveryMethod = File.ReadAllText("../Store.Repository/SeedData/delivery.json");
+                    var products = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryMethod);
+                    if (products is not null)
+                    {
+                        await context.DeliveryMethods.AddRangeAsync(products);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+
 
             }
 
