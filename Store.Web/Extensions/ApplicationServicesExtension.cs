@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Store.Repository.Basket;
 using Store.Repository.Interfaces;
 using Store.Repository.UnitOfWork;
 using Store.Service.Handle_Response;
+using Store.Service.Services.BasketServices;
+using Store.Service.Services.BasketServices.Dtos;
 using Store.Service.Services.CachService;
 using Store.Service.Services.Products;
 using Store.Service.Services.Products.Dtos;
@@ -19,6 +22,9 @@ namespace Store.Web.Extensions
             services.AddAutoMapper(typeof(ProductProfile));
 
             services.AddSingleton<ICachService , CachServices>();
+            services.AddScoped<IBasketRepository , BasketRepository>();
+            services.AddScoped<IBasketService , BasketService>();
+            services.AddAutoMapper(typeof(BasketProfile));
 
             services.Configure<ApiBehaviorOptions>(Options =>
             {
