@@ -34,6 +34,12 @@ namespace Store.Web
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
             });
+
+            builder.Services.AddDbContext<StoreIdentityDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
+
+            });
             builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
             {
                 var Configration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"));
@@ -44,6 +50,8 @@ namespace Store.Web
             builder.Services.ApplicationServices();
             var app = builder.Build();
 
+            builder.Services.ApplicationServices();
+            builder.Services.AddIdentittyService();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
