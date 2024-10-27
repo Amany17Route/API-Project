@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Store.Data.Context;
+using Store.Data.Entity.IdentityEntity;
 using Store.Repository;
 
 namespace Store.Web.Helper
@@ -16,15 +18,17 @@ namespace Store.Web.Helper
 
                 var service = scope.ServiceProvider;
 
+
                 var loggerFactory = service.GetRequiredService<ILoggerFactory>();
                 try
                 {
 
                     var context = service.GetRequiredService<StoreDbContext>();
-
+                    var UserManager = service.GetRequiredService<UserManager<AppUser>>();
                     await context.Database.MigrateAsync();
 
                     await StoreContextSeed.SeedAsync(context, loggerFactory);
+                    await StoreIdentityDbContext.SeedUserAsync(UserManager);
 
                 }
                 catch (Exception ex)
